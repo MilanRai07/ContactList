@@ -1,0 +1,22 @@
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact {
+  border-radius: 5px;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2),0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 460px;
+  height: 700px;
+  padding: 10px 20px;
+  margin-top: 3rem;
+
+}
+
+.contact-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
