@@ -6,9 +6,8 @@
 .contact-adder{
   width:45px;
   height: 45px;
-  background-color: rgb(26, 118, 194);
+  fill: rgb(26, 118, 194);
   border-radius: 50%;
-  fill:#fff;
   cursor: pointer;
   position: absolute;
   bottom:10%;
@@ -16,7 +15,19 @@
   z-index:1;
 }
 .contact-adder:hover{
-  background-color: rgb(22, 106, 175);
+  fill: rgb(22, 106, 175);
+}
+.contact-back{
+  width:45px;
+  height: 45px;
+  fill: #de0a26;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  bottom:10%;
+  right: 10%;
+  z-index:1;
+  transform: rotate(90deg);
 }
 .contact {
   border-radius: 5px;
