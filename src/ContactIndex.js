@@ -2,8 +2,10 @@ import { createContext, useState } from 'react';
 import './css/Contact.css';
 import List from './List';
 import { ReactComponent as Search } from './assets/search.svg';
-import { ReactComponent as Plus } from "./assets/pluss.svg";
+import { ReactComponent as Pluss } from "./assets/pluss.svg";
 import { ReactComponent as Cancel } from "./assets/cancel.svg";
+import cosplay from './assets/cosplay.png';
+
 import AddContact from './AddContact';
 
 const parentData = createContext();                      //creation for context ApI
@@ -12,7 +14,7 @@ const ContactIndex = () => {
   const [show, setShow] = useState(true);                   // show list or addcontact component
   const [back,setBack]=useState(true) ;                      //for canceling of add contact to back home
   const [defaultImg, setDefaultImg] = useState(true);      //show default add image icon or uploadedpicture
-  const [image, setImage] = useState();                   //store image uploaded 
+  const [image, setImage] = useState(cosplay);                   //store image uploaded 
   const [person, setPerson] = useState();                 //for name
   const [number, setNumber] = useState();                //for phone number
   const [list, setList] = useState([]);                //store datas
@@ -43,12 +45,17 @@ const ContactIndex = () => {
       })
 
       setShow(true);
+      setBack(true);
       setPerson("");
       setNumber("");
       setDefaultImg(true);
     } else {
       console.log("name is required");
     }
+  }
+
+  const beforeEdit=()=>{
+    console.log("console.lg");
   }
   const contextValue = {                //values to be send to child components
     imgDefault: defaultImg,
@@ -59,7 +66,8 @@ const ContactIndex = () => {
     setNumber: setNumber,
     add: add,
     list: list,
-    handleChange: handleChange
+    handleChange: handleChange,
+    beforeEdit:beforeEdit
 
   }
   return (
@@ -79,13 +87,13 @@ const ContactIndex = () => {
               <AddContact />
             }
             {back?
-            <Plus className='contact-adder' onClick={addCircle} />
+            <Pluss className='contact-adder' onClick={addCircle} />
             :
             <Cancel className='contact-back' onClick={backCircle}/>
             }
           </parentData.Provider>
         </div>
-
+  
       </div>
     </>
   )

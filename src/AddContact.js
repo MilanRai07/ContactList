@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import './css/addcontact.css';
 import { parentData } from './ContactIndex';
 import { ReactComponent as Profile } from "./assets/profile.svg";
 import { ReactComponent as Plus } from "./assets/plus.svg";
 const AddContact = () => {
   const context = useContext(parentData);
-  const { imgDefault, image, person, number, add, setImage, setPerson, setNumber, handleChange } = context;
+  const { imgDefault, image, person, number, add, setPerson, setNumber, handleChange } = context;
   return (
     <>
       <div className="add-container">
@@ -13,7 +13,7 @@ const AddContact = () => {
           {imgDefault ?
             <Profile className="profile" />
             :
-            <img src={image} className="photo"></img>
+            <img src={image} alt="img" className="photo"></img>
           }
           <input className="file-input" type="file" id="file" onChange={handleChange}></input>
           <label for="file"><Plus className="plus" /></label>

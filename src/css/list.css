@@ -25,9 +25,6 @@
   .image:hover{
     transform: scale(1.2);
   }
-  .detail-info{
-    text-align: center;
-  }
   .number{
     font-weight:bold;
     font-size: small;
