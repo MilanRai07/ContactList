@@ -30,7 +30,7 @@ const ContactIndex = () => {
   const backCircle=()=>{                      //to cancel the add option 
     setShow(true);
     setBack(true);
-    setImage("");
+    setDefaultImg(true);
     setNumber("");
     setPerson("");
   }
