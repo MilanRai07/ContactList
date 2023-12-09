@@ -82,6 +82,12 @@ const ContactIndex = () => {
     setBack(true);
 
   }
+  const remove = (index) => {
+      const updated = list.filter((ele) => {
+      return ele.id !== index;
+    })
+    setList(updated);
+  }
   const contextValue = {                //values to be send to child components
     imgDefault: defaultImg,
     image: image,
@@ -94,7 +100,8 @@ const ContactIndex = () => {
     handleChange: handleChange,
     beforeEdit: beforeEdit,
     afterEdit: afterEdit,
-    addchange: addchange
+    addchange: addchange,
+    remove: remove
 
   }
   return (

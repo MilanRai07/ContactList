@@ -4,7 +4,7 @@ import { parentData } from "./ContactIndex";
 
 const List = () => {
     const context = useContext(parentData);
-    const { list, beforeEdit } = context;
+    const { list, beforeEdit, remove} = context;
     return (
         <>
             {list.map((ele, index) => {
@@ -23,7 +23,7 @@ const List = () => {
                         </div>
                         <div className="list-event">
                             <button className="edit-buton" onClick={() => beforeEdit(id)}>Edit</button>
-                            <button className="del-buton" >Delete</button>
+                            <button className="del-buton" onClick={()=>remove(id)}>Delete</button>
                         </div>
                     </div>
                 )
