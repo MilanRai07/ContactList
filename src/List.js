@@ -1,22 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import './css/list.css';
 import { parentData } from "./ContactIndex";
 
 const List = () => {
-
     const context = useContext(parentData);
-    const { list } = context;
-
+    const { list, beforeEdit } = context;
     return (
         <>
             {list.map((ele, index) => {
-                const { image, person, number } = ele;
+                const { id, image, person, number } = ele;
                 return (
                     <div className="contact-list" key={index}>
                         <div className="detail">
-                            <div className="img-container">                   
-                                    <img src={image} alt="" className="image" />
-            
+                            <div className="img-container">
+                                <img src={image} alt="" className="image" />
+
                             </div>
                             <div className="detail-info">
                                 <h3>{person}</h3>
@@ -24,7 +22,7 @@ const List = () => {
                             </div>
                         </div>
                         <div className="list-event">
-                            <button className="edit-buton">Edit</button>
+                            <button className="edit-buton" onClick={() => beforeEdit(id)}>Edit</button>
                             <button className="del-buton" >Delete</button>
                         </div>
                     </div>

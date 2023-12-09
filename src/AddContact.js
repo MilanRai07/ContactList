@@ -5,7 +5,7 @@ import { ReactComponent as Profile } from "./assets/profile.svg";
 import { ReactComponent as Plus } from "./assets/plus.svg";
 const AddContact = () => {
   const context = useContext(parentData);
-  const { imgDefault, image, person, number, add, setPerson, setNumber, handleChange } = context;
+  const { imgDefault, image, person, number, add, setPerson, setNumber, handleChange, addchange, afterEdit } = context;
   return (
     <>
       <div className="add-container">
@@ -31,7 +31,11 @@ const AddContact = () => {
           </input>
         </div>
         <div>
-          <button className="edit-buton" onClick={add}>Add</button>
+          {addchange ?
+            <button className="edit-buton" onClick={add}>Add</button>
+            :
+            <button className="edit-buton" onClick={afterEdit}>Done</button>
+          }
         </div>
       </div>
     </>

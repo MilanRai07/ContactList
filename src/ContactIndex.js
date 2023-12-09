@@ -8,16 +8,18 @@ import cosplay from './assets/cosplay.png';
 
 import AddContact from './AddContact';
 
-const parentData = createContext();                      //creation for context ApI
+const parentData = createContext();   //creation for context ApI
 
 const ContactIndex = () => {
-  const [show, setShow] = useState(true);                   // show list or addcontact component
-  const [back,setBack]=useState(true) ;                      //for canceling of add contact to back home
-  const [defaultImg, setDefaultImg] = useState(true);      //show default add image icon or uploadedpicture
-  const [image, setImage] = useState(cosplay);                   //store image uploaded 
-  const [person, setPerson] = useState();                 //for name
-  const [number, setNumber] = useState();                //for phone number
-  const [list, setList] = useState([]);                //store datas
+  const [show, setShow] = useState(true);                   // show list or addcontact component form
+  const [addchange, setAddchange] = useState(true);         //show add button or done button before and after edit
+  const [back, setBack] = useState(true);                   //show plus or add button
+  const [defaultImg, setDefaultImg] = useState(true);       //show default add image icon or uploadedpicture
+  const [image, setImage] = useState(cosplay);              //store image uploaded 
+  const [person, setPerson] = useState();                   //for name
+  const [number, setNumber] = useState();                   //for phone number
+  const [list, setList] = useState([]);                     //store datas
+  const [selectId, setSelectId] = useState();               //store id of selected items in array
 
 
   const handleChange = (event) => {
@@ -25,21 +27,22 @@ const ContactIndex = () => {
     setDefaultImg(false);
   }
 
-  const addCircle = () => {                      //circel button/icon to redirect to add contact component
+  const addCircle = () => {            //circel button to redirect to add/edit contact component
     setShow(false);
     setBack(false);
+    setAddchange(true);
   }
-  const backCircle=()=>{                      //to cancel the add option 
+  const backCircle = () => {                      //to cancel the ongoing task either editing or adding 
     setShow(true);
     setBack(true);
     setDefaultImg(true);
     setNumber("");
     setPerson("");
   }
-  const add = () => {                           //store datas into list 
+  const add = () => {                           //store datas into array
     let id = new Date().toLocaleTimeString();
 
-    if ( person && number !== null) {
+    if (person && number !== null) {
       setList((olditems) => {
         return [...olditems, { id: id, image: image, person: person, number: number }]
       })
@@ -54,8 +57,30 @@ const ContactIndex = () => {
     }
   }
 
-  const beforeEdit=()=>{
-    console.log("console.lg");
+  const beforeEdit = (index, event) => {        // function to find selcted items 
+    setShow(false);
+    setAddchange(false);
+    setBack(false);
+    const findItem = list.find((ele) => {
+      return ele.id === index;
+    })
+    setPerson(findItem.person);
+    setNumber(findItem.number);
+    setSelectId(findItem.id);
+    setImage(findItem.image);
+  }
+  const afterEdit = (event) => {           //after editing array is updated
+    setShow(true);
+    const updated = list.map((ele) => {
+      if (ele.id === selectId) {
+        return { ...ele, image: image, person: person, number: number }
+      } else {
+        return ele;
+      }
+    })
+    setList(updated);
+    setBack(true);
+
   }
   const contextValue = {                //values to be send to child components
     imgDefault: defaultImg,
@@ -67,7 +92,9 @@ const ContactIndex = () => {
     add: add,
     list: list,
     handleChange: handleChange,
-    beforeEdit:beforeEdit
+    beforeEdit: beforeEdit,
+    afterEdit: afterEdit,
+    addchange: addchange
 
   }
   return (
@@ -86,14 +113,14 @@ const ContactIndex = () => {
               :
               <AddContact />
             }
-            {back?
-            <Pluss className='contact-adder' onClick={addCircle} />
-            :
-            <Cancel className='contact-back' onClick={backCircle}/>
+            {back ?
+              <Pluss className='contact-adder' onClick={addCircle} />
+              :
+              <Cancel className='contact-back' onClick={backCircle} />
             }
           </parentData.Provider>
         </div>
-  
+
       </div>
     </>
   )
