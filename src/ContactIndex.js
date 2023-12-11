@@ -28,7 +28,7 @@ const ContactIndex = () => {
   const [number, setNumber] = useState();                   //for phone number
   const [list, setList] = useState(getLocalList());          //store datas
   const [selectId, setSelectId] = useState();               //store id of selected items in array
- 
+  const [search,setSearch]=useState();                      //for search items  
 
 
   const handleChange = (event) => {                       
@@ -44,7 +44,7 @@ const ContactIndex = () => {
     setShow(false);
     setBack(false);
     setAddchange(true);
-    
+    setSearch("");
   }
   const backCircle = () => {                      //to cancel the ongoing task either editing or adding 
     setShow(true);
@@ -52,7 +52,7 @@ const ContactIndex = () => {
     setDefaultImg(true);
     setNumber("");
     setPerson("");
-
+    setSearch("");
   }
   const add = () => {                           //store datas into array
     let id = new Date().toLocaleTimeString();
@@ -67,7 +67,7 @@ const ContactIndex = () => {
       setPerson("");
       setNumber("");
       setDefaultImg(true);
-      
+      setSearch("");
     } else {
       console.log("name is required");
     }
@@ -84,7 +84,7 @@ const ContactIndex = () => {
     setNumber(findItem.number);
     setSelectId(findItem.id);
     setImage(findItem.image);
-  
+    setSearch("");
   }
   const afterEdit = (event) => {           //after editing array is updated
     setShow(true);
@@ -97,7 +97,7 @@ const ContactIndex = () => {
     })
     setList(updated);
     setBack(true);
-    
+    setSearch("");
 
   }
   const remove = (index) => {
@@ -105,6 +105,9 @@ const ContactIndex = () => {
       return ele.id !== index;
     })
     setList(updated);
+  }
+  const searchHandle=(event)=>{
+    setSearch(event.target.value);
   }
   const contextValue = {                //values to be send to child components
     imgDefault: defaultImg,
@@ -120,6 +123,7 @@ const ContactIndex = () => {
     afterEdit: afterEdit,
     addchange: addchange,
     remove: remove,
+    search:search
 
   }
   return (
@@ -134,7 +138,8 @@ const ContactIndex = () => {
               <div className='search-section'>
               <input placeholder='search' className='search'
               type='text'
-              
+              value={search}
+              onChange={searchHandle}
               ></input>
               <Search style={{cursor:"pointer"}}/>
               </div>

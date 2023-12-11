@@ -4,13 +4,18 @@ import { parentData } from "./ContactIndex";
 
 const List = () => {
     const context = useContext(parentData);
-    const { list, beforeEdit, remove} = context;
+    const { list, beforeEdit, remove,search} = context;
     
-   
-    
+    const searchFilter=()=>{
+        if(search){
+            return (list.filter((ele)=>ele.person.toLowerCase().includes(search)||ele.number.toLowerCase().includes(search)));
+        }else{
+            return list;
+        }
+    }
     return (
         <>
-            {list.map((ele, index) => {
+            {searchFilter().map((ele, index) => {
                 const { id, image, person, number } = ele;
                 return (
                     <div className="contact-list" key={index}>
