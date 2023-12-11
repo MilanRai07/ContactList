@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import './css/Contact.css';
 import List from './List';
 import { ReactComponent as Search } from './assets/search.svg';
@@ -9,7 +9,15 @@ import cosplay from './assets/cosplay.png';
 import AddContact from './AddContact';
 
 const parentData = createContext();   //creation for context ApI
-
+const getLocalList=()=>{              //function to get items from localStorage
+  let list=localStorage.getItem('localList');
+  console.log(list)
+  if(list){
+    return JSON.parse(localStorage.getItem('localList'));
+  }else{
+    return [];
+  }
+}
 const ContactIndex = () => {
   const [show, setShow] = useState(true);                   // show list or addcontact component form
   const [addchange, setAddchange] = useState(true);         //show add button or done button before and after edit
@@ -18,19 +26,25 @@ const ContactIndex = () => {
   const [image, setImage] = useState(cosplay);              //store image uploaded 
   const [person, setPerson] = useState();                   //for name
   const [number, setNumber] = useState();                   //for phone number
-  const [list, setList] = useState([]);                     //store datas
+  const [list, setList] = useState(getLocalList());          //store datas
   const [selectId, setSelectId] = useState();               //store id of selected items in array
+ 
 
 
-  const handleChange = (event) => {
+  const handleChange = (event) => {                       
     setImage(URL.createObjectURL(event.target.files[0]));
     setDefaultImg(false);
   }
+
+  useEffect(()=>{                      // to set item in local storage
+    localStorage.setItem("localList", JSON.stringify(list));
+  },[list])
 
   const addCircle = () => {            //circel button to redirect to add/edit contact component
     setShow(false);
     setBack(false);
     setAddchange(true);
+    
   }
   const backCircle = () => {                      //to cancel the ongoing task either editing or adding 
     setShow(true);
@@ -38,6 +52,7 @@ const ContactIndex = () => {
     setDefaultImg(true);
     setNumber("");
     setPerson("");
+
   }
   const add = () => {                           //store datas into array
     let id = new Date().toLocaleTimeString();
@@ -52,6 +67,7 @@ const ContactIndex = () => {
       setPerson("");
       setNumber("");
       setDefaultImg(true);
+      
     } else {
       console.log("name is required");
     }
@@ -68,6 +84,7 @@ const ContactIndex = () => {
     setNumber(findItem.number);
     setSelectId(findItem.id);
     setImage(findItem.image);
+  
   }
   const afterEdit = (event) => {           //after editing array is updated
     setShow(true);
@@ -80,6 +97,7 @@ const ContactIndex = () => {
     })
     setList(updated);
     setBack(true);
+    
 
   }
   const remove = (index) => {
@@ -101,7 +119,7 @@ const ContactIndex = () => {
     beforeEdit: beforeEdit,
     afterEdit: afterEdit,
     addchange: addchange,
-    remove: remove
+    remove: remove,
 
   }
   return (
@@ -113,7 +131,13 @@ const ContactIndex = () => {
               <h2>
                 Contacts
               </h2>
-              <Search />
+              <div className='search-section'>
+              <input placeholder='search' className='search'
+              type='text'
+              
+              ></input>
+              <Search style={{cursor:"pointer"}}/>
+              </div>
             </div>
             {show ?
               <List />

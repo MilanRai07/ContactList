@@ -56,3 +56,6 @@
     cursor: pointer;
     font-weight: bold;
   }
+  .del-buton:hover{
+    background-color: #c0061f;
+  }

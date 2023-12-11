@@ -5,6 +5,9 @@ import { parentData } from "./ContactIndex";
 const List = () => {
     const context = useContext(parentData);
     const { list, beforeEdit, remove} = context;
+    
+   
+    
     return (
         <>
             {list.map((ele, index) => {
@@ -29,7 +32,7 @@ const List = () => {
                 )
             })
 
-            }
+           }
         </>
     )
 }
