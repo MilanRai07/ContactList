@@ -1,10 +1,28 @@
+.list-container{
+  margin-top: 10px;
+ display: flex;
+ flex-direction: column;
+ gap:10px;
+ overflow: scroll;
+ max-height: 410px;
+}
+.list-container::-webkit-scrollbar {
+  display: none;
+}
+.list-container {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
 .contact-list{
     display: flex;
     gap:10px;
-    padding: 5px 0px;
-    border-bottom: 1px solid #00b4d8 ;
+    padding: 10px;
+    /* border-bottom: 2px solid #00b4d8 ; */
     align-items: center;
     justify-content: space-between;
+    font-family: Snell Roundhand, cursive;
+    background-color: #ddeef8;
+    border-radius: 20px;
   }
   .detail{
     display: flex;
@@ -25,6 +43,9 @@
   .image:hover{
     transform: scale(1.2);
   }
+  .name{
+    font-size: medium;
+  }
   .number{
     font-weight:bold;
     font-size: small;
@@ -35,7 +56,7 @@
     gap:8px;
   }
   .edit-buton{
-    width:4rem;
+    width:3.5rem;
     background-color: rgb(26, 118, 194);
     padding:13px 0px;
     border-radius: 2px;
@@ -43,12 +64,13 @@
     border: none;
     cursor: pointer;
     font-weight: bold;
+
   }
   .edit-buton:hover{
     background-color: rgb(19, 100, 167);
   }
   .del-buton{
-    width:4rem;
+    width:3.5rem;
     background-color: #de0a26;
     border-radius: 2px;
     color:#fff;

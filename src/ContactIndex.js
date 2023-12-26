@@ -133,7 +133,7 @@ const ContactIndex = () => {
           <parentData.Provider value={contextValue}>             {/* provider tag*/}
             <div className='contact-head'>
               <h2>
-                Contacts
+                Contact List
               </h2>
               <div className='search-section'>
               <input placeholder='search' className='search'

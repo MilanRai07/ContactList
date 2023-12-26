@@ -15,6 +15,7 @@ const List = () => {
     }
     return (
         <>
+        <div className="list-container">
             {searchFilter().map((ele, index) => {
                 const { id, image, person, number } = ele;
                 return (
@@ -25,7 +26,7 @@ const List = () => {
 
                             </div>
                             <div className="detail-info">
-                                <h3>{person}</h3>
+                                <h3 className="name">{person}</h3>
                                 <p className="number">{number}</p>
                             </div>
                         </div>
@@ -38,6 +39,7 @@ const List = () => {
             })
 
            }
+           </div>
         </>
     )
 }
